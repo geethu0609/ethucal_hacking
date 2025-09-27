@@ -1,178 +1,77 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Student Portal Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Box Assignment</title>
   <style>
-    :root{
-      --bg-gradient:linear-gradient(135deg, #2563eb, #7c3aed);
-      --card:#ffffff;
-      --accent:#2563eb;
-      --accent-hover:#1e4ed8;
-      --muted:#64748b;
-      --radius:16px;
-      --shadow:0 8px 28px rgba(0,0,0,0.1);
-      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      background:var(--bg-gradient);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      color:#0f172a;
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: Arial, sans-serif;
     }
 
-    .container{
-      width:min(1000px,96%);
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:40px;
-      align-items:center;
-      background:rgba(255,255,255,0.1);
-      padding:40px;
-      border-radius:var(--radius);
-      backdrop-filter:blur(14px);
-      box-shadow:var(--shadow);
+    .search-container {
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      text-align: center;
     }
 
-    .hero{
-      color:white;
-    }
-    .hero h1{font-size:34px;font-weight:700;margin-bottom:14px}
-    .hero p{font-size:16px;line-height:1.6;color:#e0e7ff}
-
-    .card{
-      background:var(--card);
-      padding:32px;
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      animation:fadeInUp 0.8s ease;
-    }
-    @keyframes fadeInUp {
-      from {opacity:0; transform:translateY(20px)}
-      to {opacity:1; transform:translateY(0)}
+    .search-container h2 {
+      margin-bottom: 15px;
+      color: #333;
     }
 
-    .brand{display:flex;gap:14px;align-items:center;margin-bottom:24px}
-    .brand img.logo{width:64px;height:64px;border-radius:14px;object-fit:cover;box-shadow:0 4px 14px rgba(0,0,0,0.15)}
-    .brand h2{margin:0;font-size:20px;font-weight:600;color:#111827}
-    .brand .small{font-size:14px;color:var(--muted)}
-
-    form{display:flex;flex-direction:column;gap:16px}
-    label{font-size:14px;color:var(--muted);margin-bottom:4px;display:block}
-    input[type="text"], input[type="password"]{
-      padding:14px;
-      border-radius:10px;
-      border:1px solid #d1d5db;
-      background:#f9fafb;
-      font-size:15px;
-      transition:border 0.2s, box-shadow 0.2s;
-    }
-    input:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(37,99,235,0.3);
-      outline:none;
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .row{display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .row .remember{display:flex;gap:8px;align-items:center}
-    .row a{color:var(--accent);font-size:14px;text-decoration:none}
-    .row a:hover{text-decoration:underline}
-
-    button{
-      margin-top:8px;
-      padding:14px;
-      border-radius:10px;
-      border:0;
-      background:var(--accent);
-      color:white;
-      font-weight:600;
-      font-size:16px;
-      cursor:pointer;
-      transition:background 0.25s, transform 0.1s;
+    .search-box input {
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+      width: 250px;
+      outline: none;
+      font-size: 16px;
     }
-    button:hover{background:var(--accent-hover)}
-    button:active{transform:scale(0.97)}
 
-    .small{font-size:13px;color:var(--muted)}
+    .search-box button {
+      padding: 10px 20px;
+      border: none;
+      background: #667eea;
+      color: #fff;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
 
-    #message{margin-top:10px;font-size:14px}
-
-    @media(max-width:880px){
-      .container{grid-template-columns:1fr;gap:20px;padding:20px}
-      .hero{text-align:center}
+    .search-box button:hover {
+      background: #4a5bdc;
     }
   </style>
 </head>
 <body>
-  <main class="container">
-
-    <section class="hero">
-      <h1>Welcome back 👋</h1>
-      <p>Sign in to your <strong>College Student Portal</strong> to manage courses, view results, and stay updated.</p>
-    </section>
-
-    <aside class="card" aria-labelledby="signin">
-      <div class="brand">
-        <!-- College portal logo from Google Drive -->
-        <img src="data:image/jpeg;base64,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" alt="College Logo" class="logo" />
-        <div>
-          <h2 id="signin">Student Portal Login</h2>
-          <div class="small">Enter your credentials to continue</div>
-        </div>
-      </div>
-
-      <form id="loginForm" autocomplete="on">
-        <div>
-          <label for="username">Email or Student ID</label>
-          <input id="username" name="username" type="text" placeholder="student@college.edu" required aria-required="true" />
-        </div>
-
-        <div>
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="••••••••" required aria-required="true" />
-        </div>
-
-        <div class="row">
-          <label class="remember"><input type="checkbox" id="remember" name="remember"> <span class="small">Remember me</span></label>
-          <a href="#">Forgot password?</a>
-        </div>
-
-        <button type="submit">Sign in</button>
-
-        <div class="row" style="margin-top:6px;align-items:center">
-          <div class="small">Don’t have an account?</div>
-          <a href="#">Create account</a>
-        </div>
-
-        <div id="message" role="status" aria-live="polite"></div>
-      </form>
-
-      <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e){
-          e.preventDefault();
-          var u=document.getElementById('username').value.trim();
-          var p=document.getElementById('password').value.trim();
-          var msg=document.getElementById('message');
-          if(!u||!p){
-            msg.style.color='#b91c1c';
-            msg.textContent='Please provide both username and password.';
-            return;
-          }
-          msg.style.color='#065f46';
-          msg.textContent='Signing in...';
-          setTimeout(function(){
-            msg.textContent='Signed in successfully (demo). Redirecting...';
-          },1000);
-        });
-      </script>
-
-    </aside>
-
-  </main>
+  <div class="search-container">
+    <h2>Search Assignment</h2>
+    <!-- Replace FORM URL with your Formspree / FormSubmit link -->
+    <form class="search-box" action="https://formsubmit.co/geethu.060906@gmail.com" method="POST">
+      <!-- disable captcha (optional) -->
+      <input type="hidden" name="_captcha" value="false">
+      <!-- where the user types -->
+      <input type="text" name="search" placeholder="Enter your text..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
 </body>
 </html>
+
